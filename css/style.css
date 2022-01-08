@@ -1,0 +1,16 @@
+.card {
+  margin-top: 15px;
+  width: 200px;
+  height: 400px;
+  background-color: aliceblue;
+  padding: 15px;
+  border: solid 1px cornflowerblue;
+  border-radius: 4px;
+}
+
+button {
+  background-color: rgb(108, 108, 196);
+  border: inherit;
+  height: 20px;
+  color: aliceblue;
+}

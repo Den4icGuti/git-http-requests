@@ -1,39 +1,45 @@
+// const refs = {
+//   btn: document.querySelector('.btn'),
+//   usersList: document.querySelector('.users-list'),
+//   clearbtn:document.querySelector('.clear-list')
+// }
+
+
+
+import pokemonCard from '../templates/pokemon-card-info.hbs';
+
+import { Notify } from 'notiflix';
+
 const refs = {
-  btn: document.querySelector('.btn'),
-  usersList: document.querySelector('.users-list'),
-  clearbtn:document.querySelector('.clear-list')
+  cardContainer: document.querySelector('.js-card-container'),
+  formSearch:document.querySelector('.js-form')
 }
 
-refs.clearbtn.addEventListener('click',clearList)
-
-refs.btn.addEventListener('click', () => {
-  fetchUsers()
-    .then((users) => renderUsersLis(users))
-    .catch((error) => alert(error))
-})
-
-function fetchUsers() { 
-  return fetch("https://jsonplaceholder.typicode.com/users")
-    .then((response) => { 
-      if (!response.ok) { 
-        throw new Error(response.status);
-      }
-      return response.json()
-    })
-}
-
-function renderUsersLis(users) { 
-  const marcup = users.map((user) => { 
-    return `<li>
-    <p><b>Name</b>: ${user.name}</p>
-     <p><b>Email</b>: ${user.email}</p>
-     <p><b>Company</b>: ${user.company.name}</p>
-    </li>`
-  }).join("")
-  refs.usersList.innerHTML = marcup;
-}
+refs.formSearch.addEventListener('submit',onSearch)
 
 
-function clearList() { 
-  refs.usersList.innerHTML = '';
+function onSearch(e) { 
+  e.preventDefault()
+
+  const formEl = e.currentTarget;
+  const id = formEl.elements.id.value;
+ 
+    
+  pokemonFetch(id)
+    .then(renderPokemonCard)
+    .catch(error => console.log(error))
+    .finally(() => formEl.reset())
+  }
+
+function pokemonFetch(pokemonId) { 
+
+return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+  .then(response => { 
+  return response.json();
+  })
+ }
+
+function renderPokemonCard(pokemon) { 
+   const marcup = pokemonCard(pokemon);
+   refs.cardContainer.innerHTML = marcup;
 }

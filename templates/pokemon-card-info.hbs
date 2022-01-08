@@ -1,0 +1,17 @@
+<div class="card-pokemon">
+ <div class="card-img">
+   <img src="{{sprites.front_default}}" alt="{{name}}">
+ </div>
+ <div class="body">
+   <h2 class="title">Name: {{name}}</h2>
+   <p class="height">Height: {{height}}</p>
+   <p class="weight">Weight: {{weight}}</p>
+
+   <p class="card-text"><b>Skills:</b></p>
+     <ul class="list-group"></ul>
+   {{#each abilities}}
+    <li class="list-group-item">{{ability.name}}</li>
+  {{/each}}
+    </ul>
+ </div>
+</div>
