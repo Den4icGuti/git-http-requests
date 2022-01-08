@@ -1,0 +1,27 @@
+{
+  "name": "git-http-requests",
+  "version": "1.0.0",
+  "description": "http requests",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel *.html",
+    "build": "build *.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Den4icGuti/git-http-requests.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Den4icGuti/git-http-requests/issues"
+  },
+  "homepage": "https://github.com/Den4icGuti/git-http-requests#readme",
+  "devDependencies": {
+    "parcel": "^2.1.1"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.7"
+  }
+}
