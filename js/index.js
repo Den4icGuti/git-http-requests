@@ -8,12 +8,13 @@
 
 import pokemonCard from '../templates/pokemon-card-info.hbs';
 
-import { Notify } from 'notiflix';
+import notiflix from 'notiflix';
 
-const refs = {
-  cardContainer: document.querySelector('.js-card-container'),
-  formSearch:document.querySelector('.js-form')
-}
+import API from '../api-servise/api';
+
+import getRefs from '../get-refs/get-refs';
+
+const refs = getRefs();
 
 refs.formSearch.addEventListener('submit',onSearch)
 
@@ -22,24 +23,23 @@ function onSearch(e) {
   e.preventDefault()
 
   const formEl = e.currentTarget;
-  const id = formEl.elements.id.value;
- 
+  const inputSearch = formEl.elements.querty.value;
+  
     
-  pokemonFetch(id)
+  API.pokemonFetch(inputSearch)
     .then(renderPokemonCard)
-    .catch(error => console.log(error))
+    .catch(onError)
     .finally(() => formEl.reset())
   }
 
-function pokemonFetch(pokemonId) { 
 
-return fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
-  .then(response => { 
-  return response.json();
-  })
- }
 
 function renderPokemonCard(pokemon) { 
    const marcup = pokemonCard(pokemon);
    refs.cardContainer.innerHTML = marcup;
 }
+
+function onError(error) { 
+  alert('Ваш покемон не найден!')
+}
+
